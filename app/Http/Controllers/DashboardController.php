@@ -25,7 +25,7 @@ class DashboardController extends Controller
 
         // {{ -- most applied jobs --}} 
         $mostAppliedJobs=JobVacancy::withCount("jobApplications as totalCount")
-        ->whereHas('totalCount','>',0)
+        ->whereHas('jobApplications')
         ->whereNull("deleted_at")
         ->orderBy("totalCount","desc")
         ->limit(5)
@@ -35,7 +35,7 @@ class DashboardController extends Controller
 
         //Top Converting Job Posts
         $topConvertingJobs=JobVacancy::withCount("jobApplications as totalCount")
-        ->whereHas('totalCount','>',0)
+        ->whereHas('jobApplications')
         ->whereNull("deleted_at")
         ->orderBy("totalCount","desc")
         ->limit(5)
