@@ -33,8 +33,11 @@ WORKDIR /app
 # Copy composer files
 COPY composer.json composer.lock ./
 
-# Install Composer dependencies
-RUN composer install --no-scripts --no-autoloader
+# Install Composer dependencies without running Laravel scripts
+RUN composer install --no-dev --no-scripts
+
+# Generate optimized autoloader after install
+RUN composer dump-autoload --optimize
 
 # Copy package files
 COPY package.json package-lock.json ./
