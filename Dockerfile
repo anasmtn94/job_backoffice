@@ -65,5 +65,8 @@ COPY Caddyfile /etc/caddy/Caddyfile
 EXPOSE 80
 EXPOSE 443
 
+# Fix permissions for FrankenPHP binary
+RUN chmod +x /usr/local/bin/frankenphp
+
 # Start FrankenPHP
-CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"] 
+CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]
