@@ -48,8 +48,9 @@ COPY . .
 # Copy PHP configuration
 COPY php.ini /usr/local/etc/php/conf.d/custom.ini
 
-# Generate autoload files
-RUN composer dump-autoload --optimize
+# Install Composer dependencies
+RUN composer install --no-dev --optimize-autoloader
+
 
 # Build frontend assets
 RUN npm run build
