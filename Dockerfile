@@ -36,8 +36,6 @@ COPY composer.json composer.lock ./
 # Install Composer dependencies without running Laravel scripts
 RUN composer install --no-dev --no-scripts
 
-# Generate optimized autoloader after install
-RUN composer dump-autoload --optimize
 
 # Copy package files
 COPY package.json package-lock.json ./
@@ -47,6 +45,9 @@ RUN npm install
 
 # Copy the rest of the application
 COPY . .
+
+# Generate optimized autoloader after install
+RUN composer dump-autoload --optimize
 
 # Copy PHP configuration
 COPY php.ini /usr/local/etc/php/conf.d/custom.ini
